@@ -1,0 +1,13 @@
+.line-break {
+  display: block;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+app-appointment {
+  width: 100%;
+}

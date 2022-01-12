@@ -1,0 +1,16 @@
+<mat-card *ngIf="appointments">
+  <mat-card-header>
+    <mat-card-title>
+      {{ appointments.length }}
+      <span class="line-break">Rendez-vous aujourd'hui</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let appointment of appointments">
+      <app-appointment [appointment]="appointment"></app-appointment>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+<mat-card *ngIf="!appointments">
+  <p>Aucun rendez-vous pour aujourd'hui.</p>
+</mat-card>

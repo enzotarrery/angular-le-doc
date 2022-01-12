@@ -1,0 +1,20 @@
+.appointment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__patient {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    background-color: lightgrey;
+  }
+
+  &--active {
+    .appointment__patient {
+      color: white;
+      background-color: #59e1f7;
+    }
+  }
+}

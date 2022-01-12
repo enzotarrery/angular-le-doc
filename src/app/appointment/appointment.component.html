@@ -1,0 +1,9 @@
+<div class="appointment" *ngIf="appointment">
+  <p class="appointment__time">{{ appointment.date | date: "H:mm" }}</p>
+  <mat-card class="appointment__patient">
+    <p class="appointment__name">
+      {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}
+    </p>
+    <p class="appointment__type">{{ appointment.subject }}</p>
+  </mat-card>
+</div>

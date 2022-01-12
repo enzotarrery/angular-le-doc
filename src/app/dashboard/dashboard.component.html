@@ -1,0 +1,18 @@
+<header class="header">
+  <h1 class="header__title">{{ title }}</h1>
+  <button mat-flat-button class="header__button">
+    <mat-icon>add</mat-icon>
+  </button>
+</header>
+
+<mat-grid-list cols="2" rowHeight="2:1" gutterSize="4%">
+  <mat-grid-tile>
+    <app-appointments></app-appointments>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <app-statistics></app-statistics>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <app-patients></app-patients>
+  </mat-grid-tile>
+</mat-grid-list>
