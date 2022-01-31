@@ -4,6 +4,7 @@ import { AppointmentsComponent } from './shared/appointments/appointments.compon
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OptionsComponent } from './options/options.component';
 import { PatientsComponent } from './shared/patients/patients.component';
+import { PatientTypeComponent } from './form/patient-type/patient-type.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,23 @@ const routes: Routes = [
   },
   {
     path: 'patients',
-    component: PatientsComponent,
+    children: [
+      {
+        path: '',
+        component: PatientsComponent,
+      },
+      {
+        path: 'add',
+        component: PatientTypeComponent,
+      },
+      {
+        path: ':id/edit',
+        component: PatientTypeComponent,
+        data: {
+          edit: true,
+        },
+      },
+    ],
   },
   {
     path: 'visites',

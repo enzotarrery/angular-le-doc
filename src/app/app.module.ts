@@ -16,6 +16,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { OptionsComponent } from './options/options.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { formatDate } from '@angular/common';
@@ -44,6 +47,9 @@ import { StatisticsComponent } from './shared/statistics/statistics.component';
     MatListModule,
     MatGridListModule,
     MatCardModule,
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
