@@ -5,18 +5,18 @@
     <table class="patients__table">
         <thead class="patients__header">
             <tr class="patients__row">
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Dernière visite</th>
-                <th>Motif</th>
+                <th class="patients__cell patients__cell--header">Nom</th>
+                <th class="patients__cell patients__cell--header">Prénom</th>
+                <th class="patients__cell patients__cell--header">Dernière visite</th>
+                <th class="patients__cell patients__cell--header">Motif</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let patient of patients" [routerLink]="'/patients/' + patient.id + '/edit'">
-                <td>{{ patient.firstName }}</td>
-                <td>{{ patient.lastName }}</td>
-                <td>{{ patient.lastIncome }}</td>
-                <td>{{ patient.lastSubject }}</td>
+        <tbody class="patients__content">
+            <tr class="patients__row" *ngFor="let patient of patients" [routerLink]="'/patients/' + patient.id">
+                <td class="patients__cell">{{ patient.firstName }}</td>
+                <td class="patients__cell">{{ patient.lastName }}</td>
+                <td class="patients__cell">{{ patient.lastIncome }}</td>
+                <td class="patients__cell">{{ patient.lastSubject }}</td>
             </tr>
         </tbody>
     </table>

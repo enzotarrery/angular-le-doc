@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Patient } from '../models/patient';
+import { DictionaryService } from './dictionary.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,10 @@ import { Patient } from '../models/patient';
 export class PatientsService {
   constructor(private httpClient: HttpClient) {}
 
-  getPatients(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/patients');
+  getPatients(string: string | null): Observable<any> {
+    return this.httpClient.get(
+      'http://localhost:3000/patients?search=' + string
+    );
   }
 
   getPatient(id: string | null): Observable<any> {

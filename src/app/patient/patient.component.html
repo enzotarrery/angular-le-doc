@@ -1,0 +1,109 @@
+<section class="patient">
+    <header>
+        <h2>{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
+    </header>
+
+    <section class="frame">
+        <header class="frame__header">
+            <h3 class="frame__title">Informations</h3>
+        </header>
+        <table class="frame__content">
+            <tbody>
+                <tr>
+                    <td>Genre : </td>
+                    <td>{{ patient.gender }}</td>
+                </tr>
+                <tr>
+                    <td>Taille : </td>
+                    <td>{{ patient.height }} cm</td>
+                </tr>
+                <tr>
+                    <td>Poids : </td>
+                    <td>{{ patient.weight }} kg</td>
+                </tr>
+                <tr>
+                    <td>Allergies : </td>
+                    <td>{{ patient.allergies }}</td>
+                </tr>
+                <tr>
+                    <td>Groupe sanguin : </td>
+                    <td>
+                        {{ patient.bloodGroup }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>N° de sécurité sociale : </td>
+                    <td>{{ patient.socialNumber }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="frame">
+        <header class="frame__header">
+            <h3 class="frame__title">Notes</h3>
+        </header>
+        <textarea class="frame__content note__content" [value]="patient.notes" disabled></textarea>
+    </section>
+
+    <section class="frame">
+        <header class="frame__header">
+            <h3 class="frame__title">Documents</h3>
+        </header>
+        <table class="documents">
+            <tbody>
+                <tr class="document" *ngFor="let document of patient.documents">
+                    <td class="document__name">{{ document.name + '.' + document.extension.toLowerCase() }}</td>
+                    <td class="document__extension">{{ document.extension }}</td>
+                    <td class="document__uploadAt">{{ document.uploadAt }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="frame">
+        <header class="frame__header">
+            <h3 class="frame__title">Traitements</h3>
+        </header>
+        <table class="treatments">
+            <thead>
+                <tr>
+                    <th>Médicaments*</th>
+                    <th>Répétition*</th>
+                    <th>Durée*</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let treatment of patient.treatments">
+                    <td>{{ treatment.drug }}</td>
+                    <td>{{ treatment.repeat.join(' / ') }}</td>
+                    <td>{{ treatment.duration }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Médicaments*</td>
+                    <td>Répétition*</td>
+                    <td>Durée*</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="" id="">
+                            <option value="">Séléctionnez un médicament</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="" multiple>
+                            <option *ngFor="let repeat of repeats" [value]="repeat.id">{{ repeat.label }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="">
+                            <option value="">Séléctionnez la durée</option>
+                        </select>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+</section>

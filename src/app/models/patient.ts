@@ -1,15 +1,19 @@
+import { Document } from './document';
+import { Treatment } from './treatment';
+
 export interface Patient {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
-  gender: number;
+  gender: number | string;
   allergies: string;
   height: string;
   weight: number;
   lastIncome: string;
   lastSubject: string;
-  bloodGroup: number;
+  bloodGroup: number | string;
   socialNumber: string;
   notes: string;
   documents: Document[];
+  treatments: Treatment[];
 }

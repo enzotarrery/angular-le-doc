@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { OptionsComponent } from './options/options.component';
 import { PatientsComponent } from './shared/patients/patients.component';
 import { PatientTypeComponent } from './form/patient-type/patient-type.component';
+import { PatientComponent } from './patient/patient.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: PatientTypeComponent,
+      },
+      {
+        path: ':id',
+        component: PatientComponent,
       },
       {
         path: ':id/edit',

@@ -18,27 +18,8 @@ export class PatientsComponent implements OnInit {
   }
 
   getData(): void {
-    this.patientsService.getPatients().subscribe((response) => {
+    this.patientsService.getPatients(this.search).subscribe((response) => {
       this.patients = response;
-      if (this.search != '') {
-        this.patients = this.patients.filter((patient) => {
-          return this.search
-            .toLowerCase()
-            .split(' ')
-            .every((word) => {
-              for (const [key, value] of Object.entries(patient)) {
-                if (
-                  (key === 'firstName' ||
-                    key === 'lastName' ||
-                    key === 'lastIncome' ||
-                    key === 'lastSubject') &&
-                  value.toLowerCase().includes(word)
-                )
-                  return value.toLowerCase().includes(word);
-              }
-            });
-        });
-      }
     });
   }
 }
