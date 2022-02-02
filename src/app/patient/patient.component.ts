@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DictionaryData } from '../models/dictionary-data';
 import { Patient } from '../models/patient';
 import { DictionaryService } from '../services/dictionary.service';
 import { PatientsService } from '../services/patients.service';
@@ -11,7 +12,9 @@ import { PatientsService } from '../services/patients.service';
 })
 export class PatientComponent implements OnInit {
   patient!: Patient;
-  repeats: { id: number; label: string }[] = [];
+  drugs: DictionaryData[] = [];
+  repeats: DictionaryData[] = [];
+  periods: DictionaryData[] = [];
 
   constructor(
     private patientsService: PatientsService,
@@ -35,15 +38,29 @@ export class PatientComponent implements OnInit {
   }
 
   getTreatmentData(): void {
+    this.getDrugs();
+    this.getRepeats();
+    this.getPeriods();
     this.getDrugLabel();
     this.getRepeatsLabels();
     this.getDurationLabel();
-    this.getRepeats();
+  }
+
+  getDrugs(): void {
+    this.dictionaryService.getDrugs().subscribe((response) => {
+      this.drugs = response;
+    });
   }
 
   getRepeats(): void {
     this.dictionaryService.getRepeats().subscribe((response) => {
       this.repeats = response;
+    });
+  }
+
+  getPeriods(): void {
+    this.dictionaryService.getPeriods().subscribe((response) => {
+      this.periods = response;
     });
   }
 

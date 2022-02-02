@@ -90,6 +90,7 @@
                     <td>
                         <select name="" id="">
                             <option value="">Séléctionnez un médicament</option>
+                            <option *ngFor="let drug of drugs" [value]="drug.id">{{ drug.label }}</option>
                         </select>
                     </td>
                     <td>
@@ -100,6 +101,7 @@
                     <td>
                         <select name="" id="">
                             <option value="">Séléctionnez la durée</option>
+                            <option *ngFor="let period of periods" [value]="period.id">{{ period.label }}</option>
                         </select>
                     </td>
                 </tr>
