@@ -25,8 +25,7 @@ import { StatisticComponent } from './components/statistic/statistic.component';
 import { formatDate } from '@angular/common';
 import { StatisticsComponent } from './components/shared/statistics/statistics.component';
 import { MeetsView } from './views/meets/meets.component';
-import { MeetsComponent } from './components/meets/meets.component';
-import { MeetComponent } from './components/meet/meet.component';
+import { MeetTypeComponent } from './form/meet-type/meet-type.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +41,7 @@ import { MeetComponent } from './components/meet/meet.component';
     StatisticComponent,
     StatisticsComponent,
     MeetsView,
-    MeetsComponent,
-    MeetComponent,
+    MeetTypeComponent,
   ],
   imports: [
     BrowserModule,

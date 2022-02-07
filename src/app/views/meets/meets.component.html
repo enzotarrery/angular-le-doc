@@ -4,3 +4,22 @@
         <mat-icon>add</mat-icon>
     </a>
 </header>
+
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Motif</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let meet of meets">
+            <td>{{ meet.patient.lastName | uppercase }} {{ meet.patient.firstName }}</td>
+            <td></td>
+            <td>{{ meet.date | date: 'dd/MM/Y' }}</td>
+            <td>{{ meet.subject }}</td>
+        </tr>
+    </tbody>
+</table>
