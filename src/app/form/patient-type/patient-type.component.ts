@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DictionaryData } from 'src/app/models/dictionary-data';
+import { DictionaryService } from 'src/app/services/dictionary.service';
 import { PatientsService } from 'src/app/services/patients.service';
 
 @Component({
@@ -11,10 +13,12 @@ import { PatientsService } from 'src/app/services/patients.service';
 export class PatientTypeComponent implements OnInit {
   form!: FormGroup;
   isEdited: boolean = false;
-  actionLabel: string = 'Ajouter un patient';
+  bloodgroups: DictionaryData[] = [];
+  actionLabel: string = 'Ajouter';
 
   constructor(
     private patientsService: PatientsService,
+    private dictionaryService: DictionaryService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -36,15 +40,7 @@ export class PatientTypeComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(/^[0-9]{15}$/)],
       ],
-      bloodGroup: [
-        '',
-        [
-          Validators.required,
-          Validators.min(1),
-          Validators.max(8),
-          Validators.maxLength(1),
-        ],
-      ],
+      bloodGroup: ['', [Validators.required]],
       height: [
         '',
         [Validators.required, Validators.minLength(2), Validators.maxLength(3)],
@@ -60,15 +56,22 @@ export class PatientTypeComponent implements OnInit {
 
   checkEdit(): void {
     if (this.route.snapshot.data['edit']) this.isEdited = true;
-    this.actionLabel = 'Modifier un patient';
+    this.actionLabel = 'Modifier';
   }
 
   getData(): void {
     this.patientsService
       .getPatient(this.route.snapshot.paramMap.get('id'))
       .subscribe((response) => {
+        this.getBloodGroups();
         this.form.patchValue(response);
       });
+  }
+
+  getBloodGroups(): void {
+    this.dictionaryService.getBloodGroups().subscribe((response) => {
+      this.bloodgroups = response;
+    });
   }
 
   add(): void {

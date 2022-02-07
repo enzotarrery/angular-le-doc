@@ -11,7 +11,13 @@
     }
   }
 
-  &__button {
+  &__button,
+  &__button:hover,
+  &__button:visited,
+  &__button:link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 3vw;
     height: 3vw;
     color: white;
@@ -21,10 +27,4 @@
     border: none;
     cursor: pointer;
   }
-}
-
-app-appointments,
-app-patients {
-  width: 100%;
-  height: 100%;
 }

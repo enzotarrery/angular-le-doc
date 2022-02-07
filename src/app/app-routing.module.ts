@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppointmentsComponent } from './shared/appointments/appointments.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { OptionsComponent } from './options/options.component';
-import { PatientsComponent } from './shared/patients/patients.component';
+import { AppointmentsComponent } from './components/shared/appointments/appointments.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { OptionsView } from './views/options/options.component';
+import { PatientsComponent } from './components/shared/patients/patients.component';
 import { PatientTypeComponent } from './form/patient-type/patient-type.component';
-import { PatientComponent } from './patient/patient.component';
+import { PatientComponent } from './views/patient/patient.component';
+import { PatientsView } from './views/patients/patients.component';
+import { MeetsView } from './views/meets/meets.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: PatientsComponent,
+        component: PatientsView,
       },
       {
         path: 'add',
@@ -38,11 +40,11 @@ const routes: Routes = [
   },
   {
     path: 'visites',
-    component: AppointmentsComponent,
+    component: MeetsView,
   },
   {
     path: 'options',
-    component: OptionsComponent,
+    component: OptionsView,
   },
 ];
 

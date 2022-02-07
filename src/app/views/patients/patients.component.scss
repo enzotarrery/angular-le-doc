@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 2rem;
+    font: {
+      size: 2vw;
+      weight: bold;
+    }
+  }
+
+  &__button,
+  &__button:hover,
+  &__button:visited,
+  &__button:link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3vw;
+    height: 3vw;
+    color: white;
+    background-color: #59e1f7;
+    border-radius: 25%;
+    border-bottom-right-radius: 0%;
+    border: none;
+    cursor: pointer;
+  }
+}

@@ -1,8 +1,8 @@
 <header class="header">
   <h1 class="header__title">{{ title }}</h1>
-  <button mat-flat-button class="header__button">
+  <a routerLink="patients/add" mat-flat-button class="header__button">
     <mat-icon>add</mat-icon>
-  </button>
+  </a>
 </header>
 
 <mat-grid-list cols="2" rowHeight="2:1" gutterSize="4%">
@@ -13,6 +13,6 @@
     <app-statistics></app-statistics>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <app-patients></app-patients>
+    <app-patients-component></app-patients-component>
   </mat-grid-tile>
 </mat-grid-list>

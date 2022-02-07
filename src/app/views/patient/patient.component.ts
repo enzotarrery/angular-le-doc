@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DictionaryData } from '../models/dictionary-data';
-import { Patient } from '../models/patient';
-import { DictionaryService } from '../services/dictionary.service';
-import { PatientsService } from '../services/patients.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DictionaryData } from '../../models/dictionary-data';
+import { Patient } from '../../models/patient';
+import { DictionaryService } from '../../services/dictionary.service';
+import { PatientsService } from '../../services/patients.service';
 
 @Component({
   selector: 'app-patient',
@@ -19,6 +19,7 @@ export class PatientComponent implements OnInit {
   constructor(
     private patientsService: PatientsService,
     private dictionaryService: DictionaryService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -112,5 +113,13 @@ export class PatientComponent implements OnInit {
         ).label;
       });
     });
+  }
+
+  archive(): void {
+    this.patientsService
+      .deletePatient(this.route.snapshot.paramMap.get('id'))
+      .subscribe((response) => {
+        this.router.navigate(['/patients']);
+      });
   }
 }

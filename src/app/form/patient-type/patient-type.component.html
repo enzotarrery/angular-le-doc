@@ -2,7 +2,7 @@
     <header class="form__header">
         <h2 class="form__title">Formulaire</h2>
         <section class="buttons form__buttons">
-            <button (click)="this.delete()" class="button button--red">Supprimer</button>
+            <button *ngIf="this.isEdited" (click)="this.delete()" class="button button--red">Supprimer</button>
             <input type="submit" class="button button--green" [value]="this.actionLabel">
         </section>
     </header>
@@ -22,8 +22,10 @@
         </label>
         <label for="bloodGroup">
             Groupe sanguin
-            <input type="number" formControlName="bloodGroup" name="bloodGroup" id="bloodGroup" min="1" max="8"
-                maxlength="1">
+            <select formControlName="bloodGroup" name="bloodGroup" id="bloodGroup" required>
+                <option value="">-- Veuillez choisir votre groupe sanguin --</option>
+                <option *ngFor="let bloodgroup of bloodgroups" [ngValue]="bloodgroup.id">{{ bloodgroup.label }}</option>
+            </select>
         </label>
         <label for="height">
             Taille

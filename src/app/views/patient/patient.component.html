@@ -1,6 +1,11 @@
 <section class="patient">
-    <header>
-        <h2>{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
+    <header class="header">
+        <h2 class="header__title">{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
+        <section class="buttons header__buttons">
+            <a routerLink="edit" class="button">Modifier</a>
+            <a href="#" class="button">Appeler</a>
+            <a (click)="this.archive()" class="button">Archiver</a>
+        </section>
     </header>
 
     <section class="frame">
