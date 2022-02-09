@@ -10,22 +10,17 @@ export class AppComponent {
     {
       path: '/',
       name: 'Home',
-      icon: 'home',
+      icon: 'dvr_24px_outlined.svg',
     },
     {
       path: 'patients',
       name: 'Patients',
-      icon: 'group',
+      icon: 'group_24px_outlined.svg',
     },
     {
       path: 'visites',
       name: 'Rendez-vous',
-      icon: 'directions_car',
-    },
-    {
-      path: 'options',
-      name: 'Paramètres',
-      icon: 'settings',
+      icon: 'drive_eta_24px_outlined.svg',
     },
   ];
 }

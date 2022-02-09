@@ -1,0 +1,18 @@
+.button {
+  &,
+  &:link,
+  &:hover,
+  &:visited {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4vw;
+    height: 4vw;
+    color: white;
+    background-color: #59e1f7;
+    border-radius: 25%;
+    border-bottom-right-radius: 0%;
+    border: none;
+    cursor: pointer;
+  }
+}

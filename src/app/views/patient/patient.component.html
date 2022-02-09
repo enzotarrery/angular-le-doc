@@ -1,18 +1,18 @@
 <section class="patient">
     <header class="header">
-        <h2 class="header__title">{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
-        <section class="buttons header__buttons">
-            <a routerLink="edit" class="button">Modifier</a>
-            <a href="#" class="button">Appeler</a>
-            <a (click)="this.archive()" class="button">Archiver</a>
+        <h2 class="title">{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
+        <section class="buttons">
+            <a routerLink="edit" class="header__button">Modifier</a>
+            <a href="#" class="header__button">Appeler</a>
+            <a (click)="this.archive()" class="header__button header__button--red">Archiver</a>
         </section>
     </header>
 
-    <section class="frame">
-        <header class="frame__header">
-            <h3 class="frame__title">Informations</h3>
+    <section class="tile patient__info">
+        <header class="header">
+            <h3 class="title">Informations</h3>
         </header>
-        <table class="frame__content">
+        <table>
             <tbody>
                 <tr>
                     <td>Genre : </td>
@@ -44,16 +44,16 @@
         </table>
     </section>
 
-    <section class="frame">
-        <header class="frame__header">
-            <h3 class="frame__title">Notes</h3>
+    <section class="tile note">
+        <header class="header">
+            <h3 class="title">Notes</h3>
         </header>
-        <textarea class="frame__content note__content" [value]="patient.notes" disabled></textarea>
+        <textarea class="note__content" [value]="patient.notes" disabled></textarea>
     </section>
 
-    <section class="frame">
-        <header class="frame__header">
-            <h3 class="frame__title">Documents</h3>
+    <section class="tile">
+        <header class="header">
+            <h3 class="title">Documents</h3>
         </header>
         <table class="documents">
             <tbody>
@@ -66,11 +66,11 @@
         </table>
     </section>
 
-    <section class="frame">
-        <header class="frame__header">
-            <h3 class="frame__title">Traitements</h3>
+    <section class="tile">
+        <header class="header">
+            <h3 class="title">Traitements</h3>
         </header>
-        <table class="treatments">
+        <table class="patient__treatments">
             <thead>
                 <tr>
                     <th>Médicaments*</th>
@@ -83,28 +83,36 @@
                     <td>{{ treatment.drug }}</td>
                     <td>{{ treatment.repeat.join(' / ') }}</td>
                     <td>{{ treatment.duration }}</td>
+                    <td class="actions">
+                        <div class="button button--green actions__button">
+                            <img src="assets/icon/create_24px.svg" alt="Modifier le traitement">
+                        </div>
+                        <div class="button button--green actions__button">
+                            <img src="assets/icon/delete_forever_24px.svg" alt="Supprimer le traitement">
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td>Médicaments*</td>
-                    <td>Répétition*</td>
-                    <td>Durée*</td>
+                    <th>Médicaments*</th>
+                    <th>Répétition*</th>
+                    <th>Durée*</th>
                 </tr>
                 <tr>
                     <td>
-                        <select name="" id="">
+                        <select class="select" name="" id="">
                             <option value="">Séléctionnez un médicament</option>
                             <option *ngFor="let drug of drugs" [value]="drug.id">{{ drug.label }}</option>
                         </select>
                     </td>
                     <td>
-                        <select name="" id="" multiple>
+                        <select class="select" name="" id="" multiple>
                             <option *ngFor="let repeat of repeats" [value]="repeat.id">{{ repeat.label }}</option>
                         </select>
                     </td>
                     <td>
-                        <select name="" id="">
+                        <select class="select" name="" id="">
                             <option value="">Séléctionnez la durée</option>
                             <option *ngFor="let period of periods" [value]="period.id">{{ period.label }}</option>
                         </select>

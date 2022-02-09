@@ -1,16 +1,14 @@
-<mat-card *ngIf="statistics">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>Statistiques</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-title-group>
-  </mat-card-header>
-  <mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let statistic of statistics">
+<section class="tile" *ngIf="statistics">
+  <header class="header">
+    <h2 class="title">Statistiques</h2>
+    <h3 class="subtitle"></h3>
+  </header>
+  <ul class="list">
+    <li class="list__item" *ngFor="let statistic of statistics">
       <app-statistic [statistic]="statistic"></app-statistic>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
-<mat-card *ngIf="!statistics">
+    </li>
+  </ul>
+</section>
+<section class="tile" *ngIf="!statistics">
   <p>Aucun statistique pour le moment.</p>
-</mat-card>
+</section>

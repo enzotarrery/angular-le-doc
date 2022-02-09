@@ -1,0 +1,15 @@
+.patient {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &__info {
+    width: initial;
+  }
+
+  &__treatments {
+    text-align: left;
+    width: 100%;
+  }
+}

@@ -1,0 +1,45 @@
+.table {
+  width: 100%;
+  margin: 3vh 0;
+
+  border-collapse: separate;
+  border-spacing: 0 2vh;
+
+  &__head {
+    text-align: start;
+    color: #c5c8d4;
+    font-weight: normal;
+    padding: 1vh 0;
+  }
+
+  &__row {
+    height: 75px;
+    background: #ffffff;
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition: box-shadow 0.25s;
+
+    &:hover {
+      box-shadow: rgba(174, 174, 192, 0.2) 0px 7px 29px 0px;
+    }
+  }
+
+  &__cell {
+    text-align: center;
+    &:nth-child(n + 2) {
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        height: 50px;
+        width: 1px;
+        background-color: #e5e5e5;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &__field {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 40%;
+    padding: 1vh 5px;
+  }
+
+  &__field::placeholder {
+    color: #c5c8d4;
+  }
+}

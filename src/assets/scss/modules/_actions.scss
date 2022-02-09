@@ -1,0 +1,15 @@
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  &__button {
+    &,
+    &:link,
+    &:hover,
+    &:visited {
+      width: 2vw;
+      height: 2vw;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 100%;
+
+  &__button {
+    &,
+    &:link,
+    &:hover,
+    &:visited {
+      color: #fff;
+    }
+
+    background: #c5c8d4;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 0.5vw 1.5vw;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &--red {
+      background: rgba(215, 64, 0, 0.56);
+    }
+
+    &--green {
+      background: #00e676;
+    }
+  }
+}

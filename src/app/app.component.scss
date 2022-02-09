@@ -1,7 +1,45 @@
-mat-sidenav-container {
-  height: 100%;
+.mat-sidenav-container {
+  height: 100vh;
 }
 
-mat-sidenav-content {
-  padding: 3% 10%;
+.mat-sidenav {
+  background-color: #20295a;
+  width: 75px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  transition: width 0.25s ease-in-out;
+
+  a {
+    color: #fff;
+  }
+
+  .mat-nav-list {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .nav__label {
+    margin: 0 12px;
+    font-size: 0.8rem;
+    display: none;
+  }
+
+  .nav__item--compte {
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    width: 150px;
+
+    .nav__label {
+      display: block;
+    }
+  }
+}
+
+.mat-sidenav-content {
+  padding: 2% 10%;
 }

@@ -13,6 +13,7 @@ import { PatientsService } from 'src/app/services/patients.service';
 export class PatientTypeComponent implements OnInit {
   form!: FormGroup;
   isEdited: boolean = false;
+  genders: DictionaryData[] = [];
   bloodgroups: DictionaryData[] = [];
   actionLabel: string = 'Ajouter';
 
@@ -36,6 +37,7 @@ export class PatientTypeComponent implements OnInit {
     this.form = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
+      gender: ['', [Validators.required]],
       socialNumber: [
         '',
         [Validators.required, Validators.pattern(/^[0-9]{15}$/)],
@@ -63,9 +65,16 @@ export class PatientTypeComponent implements OnInit {
     this.patientsService
       .getPatient(this.route.snapshot.paramMap.get('id'))
       .subscribe((response) => {
+        this.getGenders();
         this.getBloodGroups();
         this.form.patchValue(response);
       });
+  }
+
+  getGenders(): void {
+    this.dictionaryService.getGenders().subscribe((response) => {
+      this.genders = response;
+    });
   }
 
   getBloodGroups(): void {

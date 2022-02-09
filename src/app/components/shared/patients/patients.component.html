@@ -1,22 +1,22 @@
 <section class="patients">
     <input type="text" [(ngModel)]="this.search" (input)="this.getData()" name="patients_search" id="patients_search"
-        class="patients__searchbar" placeholder="Rechercher">
+        class="search__field" placeholder="Rechercher">
 
-    <table class="patients__table">
-        <thead class="patients__header">
-            <tr class="patients__row">
-                <th class="patients__cell patients__cell--header">Nom</th>
-                <th class="patients__cell patients__cell--header">Prénom</th>
-                <th class="patients__cell patients__cell--header">Dernière visite</th>
-                <th class="patients__cell patients__cell--header">Motif</th>
+    <table class="table">
+        <thead class="table__header">
+            <tr class="table__row--header">
+                <th class="table__head">Nom</th>
+                <th class="table__head">Prénom</th>
+                <th class="table__head">Dernière visite</th>
+                <th class="table__head">Motif</th>
             </tr>
         </thead>
-        <tbody class="patients__content">
-            <tr class="patients__row" *ngFor="let patient of patients" [routerLink]="'/patients/' + patient.id">
-                <td class="patients__cell">{{ patient.firstName }}</td>
-                <td class="patients__cell">{{ patient.lastName }}</td>
-                <td class="patients__cell">{{ patient.lastIncome }}</td>
-                <td class="patients__cell">{{ patient.lastSubject }}</td>
+        <tbody class="table__body">
+            <tr class="table__row" *ngFor="let patient of patients" [routerLink]="'/patients/' + patient.id">
+                <td class="table__cell">{{ patient.firstName }}</td>
+                <td class="table__cell">{{ patient.lastName }}</td>
+                <td class="table__cell">{{ patient.lastIncome }}</td>
+                <td class="table__cell">{{ patient.lastSubject }}</td>
             </tr>
         </tbody>
     </table>

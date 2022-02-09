@@ -1,45 +1,69 @@
-<form class="form" [formGroup]="form" (ngSubmit)="this.isEdited ? this.update() : this.add()">
-    <header class="form__header">
-        <h2 class="form__title">Formulaire</h2>
-        <section class="buttons form__buttons">
-            <button *ngIf="this.isEdited" (click)="this.delete()" class="button button--red">Supprimer</button>
-            <input type="submit" class="button button--green" [value]="this.actionLabel">
+<section class="patient-form">
+    <header class="header">
+        <h2 class="title">Formulaire</h2>
+        <section class="buttons header__buttons">
+            <button *ngIf="this.isEdited" (click)="this.delete()"
+                class="header__button header__button--red">Supprimer</button>
+            <input type="submit" class="header__button header__button--green" [value]="this.actionLabel">
         </section>
     </header>
 
-    <section class="form__content">
-        <label for="lastName">
-            Nom
-            <input type="text" formControlName="lastName" name="lastName" id="lastName" minlength="2">
-        </label>
-        <label for="firstName">
-            Prénom
-            <input type="text" formControlName="firstName" name="firstName" id="firstName" minlength="2">
-        </label>
-        <label for="socialNumber">
-            N° de sécurité sociale
-            <input type="text" formControlName="socialNumber" name="socialNumber" id="socialNumber" minlength="15">
-        </label>
-        <label for="bloodGroup">
-            Groupe sanguin
-            <select formControlName="bloodGroup" name="bloodGroup" id="bloodGroup" required>
-                <option value="">-- Veuillez choisir votre groupe sanguin --</option>
-                <option *ngFor="let bloodgroup of bloodgroups" [ngValue]="bloodgroup.id">{{ bloodgroup.label }}</option>
-            </select>
-        </label>
-        <label for="height">
-            Taille
-            <input type="text" formControlName="height" name="height" id="height" minlength="2" maxlength="3">
-        </label>
-        <label for="weight">
-            Poids
-            <input type="number" formControlName="weight" name="weight" id="weight" min="1">
-        </label>
-        <label for="allergies">
-            Allergies
-            <input type="text" formControlName="allergies" name="allergies" id="allergies" maxlength="150">
-        </label>
-        <textarea formControlName="notes" name="notes" id="notes" cols="30" rows="10" placeholder="Quelques notes..."
-            maxlength="250"></textarea>
+    <form class="tile" [formGroup]="form" (ngSubmit)="this.isEdited ? this.update() : this.add()">
+        <section class="form__content">
+            <label for="lastName">
+                Nom
+                <input type="text" formControlName="lastName" name="lastName" id="lastName" minlength="2">
+            </label>
+            <label for="firstName">
+                Prénom
+                <input type="text" formControlName="firstName" name="firstName" id="firstName" minlength="2">
+            </label>
+            <label for="gender">
+                Genre
+                <select formControlName="gender" name="gender" id="gender" required>
+                    <option value="">-- Veuillez choisir un genre --</option>
+                    <option *ngFor="let gender of genders" [ngValue]="gender.id">{{ gender.label }}</option>
+                </select>
+            </label>
+            <label for="socialNumber">
+                N° de sécurité sociale
+                <input type="text" formControlName="socialNumber" name="socialNumber" id="socialNumber" minlength="15">
+            </label>
+            <label for="bloodGroup">
+                Groupe sanguin
+                <select formControlName="bloodGroup" name="bloodGroup" id="bloodGroup" required>
+                    <option value="">-- Veuillez choisir votre groupe sanguin --</option>
+                    <option *ngFor="let bloodgroup of bloodgroups" [ngValue]="bloodgroup.id">{{ bloodgroup.label }}
+                    </option>
+                </select>
+            </label>
+            <label for="height">
+                Taille
+                <input type="text" formControlName="height" name="height" id="height" minlength="2" maxlength="3">
+            </label>
+            <label for="weight">
+                Poids
+                <input type="number" formControlName="weight" name="weight" id="weight" min="1">
+            </label>
+            <label for="allergies">
+                Allergies
+                <input type="text" formControlName="allergies" name="allergies" id="allergies" maxlength="150">
+            </label>
+        </section>
+    </form>
+
+    <section class="tile note">
+        <header class="header">
+            <h2 class="title">Notes</h2>
+        </header>
+        <textarea class="note__content" formControlName="notes" name="notes" id="notes" cols="30" rows="10"
+            placeholder="Quelques notes..." maxlength="250"></textarea>
     </section>
-</form>
+
+    <section class="tile">
+        <header class="header">
+            <h3 class="title">Traitements</h3>
+        </header>
+
+    </section>
+</section>

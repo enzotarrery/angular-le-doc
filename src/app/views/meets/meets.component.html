@@ -1,25 +1,25 @@
 <header class="header">
-    <h2 class="title header__title">Visites</h2>
-    <a routerLink="" mat-flat-button class="header__button">
+    <h2 class="title">Visites</h2>
+    <a routerLink="" mat-flat-button class="button">
         <mat-icon>add</mat-icon>
     </a>
 </header>
 
-<table>
-    <thead>
-        <tr>
-            <th>Patient</th>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Motif</th>
+<table class="table">
+    <thead class="table_header">
+        <tr class="table__row--header">
+            <th class="table__head">Patient</th>
+            <th class="table__head">Type</th>
+            <th class="table__head">Date</th>
+            <th class="table__head">Motif</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let meet of meets">
-            <td>{{ meet.patient.lastName | uppercase }} {{ meet.patient.firstName }}</td>
-            <td></td>
-            <td>{{ meet.date | date: 'dd/MM/Y' }}</td>
-            <td>{{ meet.subject }}</td>
+    <tbody class="table__body">
+        <tr class="table__row" *ngFor="let meet of meets">
+            <td class="table__cell">{{ meet.patient.lastName | uppercase }} {{ meet.patient.firstName }}</td>
+            <td class="table__cell"></td>
+            <td class="table__cell">{{ meet.date | date: 'dd/MM/Y' }}</td>
+            <td class="table__cell">{{ meet.subject }}</td>
         </tr>
     </tbody>
 </table>

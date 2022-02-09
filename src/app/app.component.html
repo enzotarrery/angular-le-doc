@@ -1,16 +1,25 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav #sidenav mode="side" opened>
     <header>
-      <mat-nav-list>
-        <a
-          mat-list-item
-          *ngFor="let route of routes"
-          routerLink="{{ route.path }}"
-        >
-          <mat-icon mat-list-icon>{{ route.icon }}</mat-icon>
-          {{ route.name }}
-        </a>
-      </mat-nav-list>
+      <nav>
+        <mat-nav-list>
+          <a class="nav__item nav__item--logo" mat-list-item routerLink="/" routerLinkActive="router-link-active">
+            <img src="/assets/icon/healing_24px.svg" alt="logo">
+          </a>
+          <div>
+            <a mat-list-item class="nav__item nav__item--dash" *ngFor="let route of routes"
+              routerLink="{{ route.path }}" routerLinkActive="router-link-active">
+              <img class="nav__icon" [src]="'/assets/icon/' + route.icon" alt="logo">
+              <p class="nav__label hidden">{{ route.name }}</p>
+            </a>
+          </div>
+          <a class="nav__item nav__item--compte" mat-list-item routerLink="/options"
+            routerLinkActive="router-link-active">
+            <img class="nav__icon" src="/assets/icon/settings_24px_outlined.svg" alt="logo">
+            <p class="nav__label hidden">Compte</p>
+          </a>
+        </mat-nav-list>
+      </nav>
     </header>
   </mat-sidenav>
   <mat-sidenav-content>
