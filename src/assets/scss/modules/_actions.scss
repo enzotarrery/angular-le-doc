@@ -11,5 +11,14 @@
       width: 2vw;
       height: 2vw;
     }
+
+    &--delete {
+      &,
+      &:link,
+      &:hover,
+      &:visited {
+        background-color: rgba(215, 64, 0, 0.56);
+      }
+    }
   }
 }

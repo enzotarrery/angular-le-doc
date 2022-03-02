@@ -15,4 +15,26 @@
     border: none;
     cursor: pointer;
   }
+
+  &--green {
+    &,
+    &:link,
+    &:hover,
+    &:visited {
+      background-color: green;
+    }
+  }
+
+  &--add-treatment {
+    &,
+    &:link,
+    &:hover,
+    &:visited {
+      margin: auto;
+      padding: 1rem;
+      border-radius: 5px;
+      width: 25%;
+      height: 50%;
+    }
+  }
 }

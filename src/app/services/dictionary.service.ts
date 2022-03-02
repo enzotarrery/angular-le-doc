@@ -26,7 +26,7 @@ export class DictionaryService {
     return this.httpClient.get('http://localhost:3000/dictionaries/repeats');
   }
 
-  getPeriods(): Observable<any> {
+  getDurations(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/dictionaries/periods');
   }
 }

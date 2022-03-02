@@ -4,7 +4,7 @@
         <section class="buttons">
             <a routerLink="edit" class="header__button">Modifier</a>
             <a href="#" class="header__button">Appeler</a>
-            <a (click)="this.archive()" class="header__button header__button--red">Archiver</a>
+            <a (click)="archive()" class="header__button header__button--red">Archiver</a>
         </section>
     </header>
 
@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <td>Genre : </td>
-                    <td>{{ patient.gender }}</td>
+                    <td>{{ labels.gender }}</td>
                 </tr>
                 <tr>
                     <td>Taille : </td>
@@ -33,7 +33,7 @@
                 <tr>
                     <td>Groupe sanguin : </td>
                     <td>
-                        {{ patient.bloodGroup }}
+                        {{ labels.bloodGroup }}
                     </td>
                 </tr>
                 <tr>
@@ -70,55 +70,51 @@
         <header class="header">
             <h3 class="title">Traitements</h3>
         </header>
-        <table class="patient__treatments">
-            <thead>
-                <tr>
-                    <th>Médicaments*</th>
-                    <th>Répétition*</th>
-                    <th>Durée*</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let treatment of patient.treatments">
-                    <td>{{ treatment.drug }}</td>
-                    <td>{{ treatment.repeat.join(' / ') }}</td>
-                    <td>{{ treatment.duration }}</td>
-                    <td class="actions">
-                        <div class="button button--green actions__button">
-                            <img src="assets/icon/create_24px.svg" alt="Modifier le traitement">
-                        </div>
-                        <div class="button button--green actions__button">
-                            <img src="assets/icon/delete_forever_24px.svg" alt="Supprimer le traitement">
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Médicaments*</th>
-                    <th>Répétition*</th>
-                    <th>Durée*</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select class="select" name="" id="">
-                            <option value="">Séléctionnez un médicament</option>
-                            <option *ngFor="let drug of drugs" [value]="drug.id">{{ drug.label }}</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="select" name="" id="" multiple>
-                            <option *ngFor="let repeat of repeats" [value]="repeat.id">{{ repeat.label }}</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="select" name="" id="">
-                            <option value="">Séléctionnez la durée</option>
-                            <option *ngFor="let period of periods" [value]="period.id">{{ period.label }}</option>
-                        </select>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+        <form [formGroup]="form">
+            <table class="patient__treatments">
+                <thead>
+                    <tr>
+                        <th>Médicaments*</th>
+                        <th>Répétition*</th>
+                        <th>Durée*</th>
+                        <th>Actions*</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="treatments">
+                    <tr *ngFor="let treatmentForm of treatmentsForms.controls; let key = index" [formGroupName]="key">
+                        <td>
+                            <select formControlName="drug" class="select" name="drug" id="drug">
+                                <option value="" selected>Séléctionnez un médicament</option>
+                                <option *ngFor="let drug of drugs" [ngValue]="drug.id">{{ drug.label }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select formControlName="repeat" class="select" name="repeat" id="repeat" multiple>
+                                <option *ngFor="let repeat of repeats" [ngValue]="repeat.id">{{ repeat.label }}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select formControlName="duration" class="select" name="period" id="period">
+                                <option value="" selected>Séléctionnez la durée</option>
+                                <option *ngFor="let duration of durations" [ngValue]="duration.id">{{ duration.label }}
+                                </option>
+                            </select>
+                        </td>
+                        <td class="actions">
+                            <div class="button actions__button actions__button--delete" (click)="deleteRow(key)">
+                                <img src="assets/icon/delete_forever_24px.svg" alt="Supprimer le traitement">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="treatments__add" colspan="4">
+                            <button class="button button--add-treatment" (click)="addRow()">Ajouter un
+                                traitement</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
     </section>
 </section>

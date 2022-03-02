@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DictionaryData } from '../../models/dictionary-data';
 import { Patient } from '../../models/patient';
@@ -12,19 +13,37 @@ import { PatientsService } from '../../services/patients.service';
 })
 export class PatientComponent implements OnInit {
   patient!: Patient;
+  form!: FormGroup;
   drugs: DictionaryData[] = [];
   repeats: DictionaryData[] = [];
-  periods: DictionaryData[] = [];
+  durations: DictionaryData[] = [];
+  labels = {
+    gender: '',
+    bloodGroup: '',
+  };
+  treatmentGroup: FormGroup = this.fb.group({
+    drug: ['', [Validators.required]],
+    repeat: [''],
+    duration: ['', [Validators.required]],
+  });
 
   constructor(
     private patientsService: PatientsService,
     private dictionaryService: DictionaryService,
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
     this.getData();
+  }
+
+  initForm(): void {
+    this.form = this.fb.group({
+      treatments: this.fb.array([]),
+    });
   }
 
   getData(): void {
@@ -39,12 +58,22 @@ export class PatientComponent implements OnInit {
   }
 
   getTreatmentData(): void {
+    /* We loop on the patient's treatments */
+    this.patient.treatments.forEach((treatment) => {
+      this.addRow();
+    });
+
+    /* Then we patch the value to the form */
+    this.form.patchValue(this.patient);
+
+    /* We get the choices for a treatment to add */
     this.getDrugs();
     this.getRepeats();
-    this.getPeriods();
-    this.getDrugLabel();
-    this.getRepeatsLabels();
-    this.getDurationLabel();
+    this.getDurations();
+  }
+
+  get treatmentsForms(): FormArray {
+    return this.form.get('treatments') as FormArray;
   }
 
   getDrugs(): void {
@@ -59,15 +88,15 @@ export class PatientComponent implements OnInit {
     });
   }
 
-  getPeriods(): void {
-    this.dictionaryService.getPeriods().subscribe((response) => {
-      this.periods = response;
+  getDurations(): void {
+    this.dictionaryService.getDurations().subscribe((response) => {
+      this.durations = response;
     });
   }
 
   getGenderLabel(): void {
     this.dictionaryService.getGenders().subscribe((response) => {
-      this.patient.gender = response.find(
+      this.labels.gender = response.find(
         (gender: { id: number }) => gender.id === this.patient.gender
       ).label;
     });
@@ -75,43 +104,10 @@ export class PatientComponent implements OnInit {
 
   getBloodGroupLabel(): void {
     this.dictionaryService.getBloodGroups().subscribe((response) => {
-      this.patient.bloodGroup = response.find(
+      this.labels.bloodGroup = response.find(
         (bloodGroup: { id: number }) =>
           bloodGroup.id === this.patient.bloodGroup
       ).label;
-    });
-  }
-
-  getDrugLabel(): void {
-    this.dictionaryService.getDrugs().subscribe((response) => {
-      this.patient.treatments.forEach((treatment) => {
-        treatment.drug = response.find(
-          (drug: { id: number }) => drug.id === treatment.drug
-        ).label;
-      });
-    });
-  }
-
-  getRepeatsLabels(): void {
-    this.dictionaryService.getRepeats().subscribe((response) => {
-      this.patient.treatments.forEach((treatment) => {
-        treatment.repeat = treatment.repeat.map(
-          (repeat) =>
-            response.find(
-              (responseRepeat: { id: number }) => responseRepeat.id === repeat
-            ).label
-        );
-      });
-    });
-  }
-
-  getDurationLabel(): void {
-    this.dictionaryService.getPeriods().subscribe((response) => {
-      this.patient.treatments.forEach((treatment) => {
-        treatment.duration = response.find(
-          (period: { id: number }) => period.id === treatment.duration
-        ).label;
-      });
     });
   }
 
@@ -121,5 +117,13 @@ export class PatientComponent implements OnInit {
       .subscribe((response) => {
         this.router.navigate(['/patients']);
       });
+  }
+
+  addRow(): void {
+    this.treatmentsForms.push(this.treatmentGroup);
+  }
+
+  deleteRow(index: number): void {
+    this.treatmentsForms.removeAt(index);
   }
 }
