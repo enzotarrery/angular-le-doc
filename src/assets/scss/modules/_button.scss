@@ -16,12 +16,21 @@
     cursor: pointer;
   }
 
+  &--red {
+    &,
+    &:link,
+    &:hover,
+    &:visited {
+      background-color: rgba(215, 64, 0, 0.56);
+    }
+  }
+
   &--green {
     &,
     &:link,
     &:hover,
     &:visited {
-      background-color: green;
+      background-color: #00e676;
     }
   }
 

@@ -1,4 +1,4 @@
-<section class="patient">
+<section class="patient" *ngIf="patient">
     <header class="header">
         <h2 class="title">{{ patient.lastName | uppercase }} {{ patient.firstName }}</h2>
         <section class="buttons">
@@ -80,7 +80,25 @@
                         <th>Actions*</th>
                     </tr>
                 </thead>
-                <tbody formArrayName="treatments">
+                <tbody>
+                    <tr *ngFor="let treatment of labels.treatments; let key = index">
+                        <td>{{ treatment.drug }}</td>
+                        <td>{{ treatment.repeat.join(' / ') }}</td>
+                        <td>{{ treatment.duration }}</td>
+                        <td class="actions">
+                            <div class="button button--red actions__button" (click)="deleteTreatment(key)">
+                                <img src="assets/icon/delete_forever_24px.svg" alt="Supprimer le traitement">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot formArrayName="treatments">
+                    <tr>
+                        <th>Médicaments*</th>
+                        <th>Répétition*</th>
+                        <th>Durée*</th>
+                        <th>Actions*</th>
+                    </tr>
                     <tr *ngFor="let treatmentForm of treatmentsForms.controls; let key = index" [formGroupName]="key">
                         <td>
                             <select formControlName="drug" class="select" name="drug" id="drug">
@@ -102,8 +120,11 @@
                             </select>
                         </td>
                         <td class="actions">
-                            <div class="button actions__button actions__button--delete" (click)="deleteRow(key)">
-                                <img src="assets/icon/delete_forever_24px.svg" alt="Supprimer le traitement">
+                            <div class="button button--green actions__button" (click)="addTreatment(key)">
+                                <img src="assets/icon/done_24px.svg" alt="Ajouter le traitement">
+                            </div>
+                            <div class="button button--red actions__button" (click)="deleteRow(key)">
+                                <img src="assets/icon/clear_24px.svg" alt="Supprimer le traitement">
                             </div>
                         </td>
                     </tr>
@@ -113,7 +134,7 @@
                                 traitement</button>
                         </td>
                     </tr>
-                </tbody>
+                </tfoot>
             </table>
         </form>
     </section>

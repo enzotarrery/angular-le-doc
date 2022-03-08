@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Treatment } from 'src/app/models/treatment';
 import { DictionaryData } from '../../models/dictionary-data';
 import { Patient } from '../../models/patient';
 import { DictionaryService } from '../../services/dictionary.service';
@@ -20,6 +21,7 @@ export class PatientComponent implements OnInit {
   labels = {
     gender: '',
     bloodGroup: '',
+    treatments: [] as Treatment[],
   };
   treatmentGroup: FormGroup = this.fb.group({
     drug: ['', [Validators.required]],
@@ -50,26 +52,29 @@ export class PatientComponent implements OnInit {
     this.patientsService
       .getPatient(this.route.snapshot.paramMap.get('id'))
       .subscribe((response) => {
+        /* We fetch the patient's data */
         this.patient = response;
+
+        /* Then convert some to their label */
         this.getGenderLabel();
         this.getBloodGroupLabel();
+
+        /* And we get the treatment data */
         this.getTreatmentData();
       });
   }
 
   getTreatmentData(): void {
-    /* We loop on the patient's treatments */
-    this.patient.treatments.forEach((treatment) => {
-      this.addRow();
-    });
-
-    /* Then we patch the value to the form */
-    this.form.patchValue(this.patient);
+    /* We clone the patient's treatments for the label conversion */
+    this.labels.treatments = this.patient.treatments;
 
     /* We get the choices for a treatment to add */
     this.getDrugs();
     this.getRepeats();
     this.getDurations();
+
+    /* We convert the treatments label too */
+    this.getTreatmentsLabels();
   }
 
   get treatmentsForms(): FormArray {
@@ -111,6 +116,45 @@ export class PatientComponent implements OnInit {
     });
   }
 
+  getDrugLabel(): void {
+    this.dictionaryService.getDrugs().subscribe((response) => {
+      this.labels.treatments.forEach((treatment) => {
+        treatment.drug = response.find(
+          (drug: { id: number }) => drug.id === treatment.drug
+        ).label;
+      });
+    });
+  }
+
+  getRepeatsLabels(): void {
+    this.dictionaryService.getRepeats().subscribe((response) => {
+      this.labels.treatments.forEach((treatment) => {
+        treatment.repeat = treatment.repeat.map(
+          (repeat) =>
+            response.find(
+              (responseRepeat: { id: number }) => responseRepeat.id === repeat
+            ).label
+        );
+      });
+    });
+  }
+
+  getDurationLabel(): void {
+    this.dictionaryService.getDurations().subscribe((response) => {
+      this.labels.treatments.forEach((treatment) => {
+        treatment.duration = response.find(
+          (duration: { id: number }) => duration.id === treatment.duration
+        ).label;
+      });
+    });
+  }
+
+  getTreatmentsLabels(): void {
+    this.getDrugLabel();
+    this.getRepeatsLabels();
+    this.getDurationLabel();
+  }
+
   archive(): void {
     this.patientsService
       .deletePatient(this.route.snapshot.paramMap.get('id'))
@@ -125,5 +169,28 @@ export class PatientComponent implements OnInit {
 
   deleteRow(index: number): void {
     this.treatmentsForms.removeAt(index);
+  }
+
+  addTreatment(index: number): void {
+    /* The treatment to be added */
+    let treatment = this.form.value.treatments[index];
+
+    /* The treatment is added */
+    this.patient.treatments.push(treatment);
+
+    /* The patient's data is updated */
+    this.patientsService
+      .updatePatient(this.patient.id, this.patient)
+      .subscribe((reponse) => {
+        this.deleteRow(index);
+      });
+  }
+
+  deleteTreatment(index: number): void {
+    this.patient.treatments.splice(index, 1);
+
+    this.patientsService
+      .updatePatient(this.patient.id, this.patient)
+      .subscribe((reponse) => {});
   }
 }
